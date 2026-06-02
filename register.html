@@ -14,70 +14,147 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
       * {
         font-family: "Inter", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
       body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(145deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
         min-height: 100vh;
         padding: 2rem 0;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="rgba(13,110,253,0.05)" d="M0 0h200v200H0z"/><circle cx="50" cy="50" r="30" fill="rgba(13,110,253,0.1)"/><circle cx="150" cy="150" r="40" fill="rgba(13,110,253,0.08)"/></svg>');
+        background-repeat: repeat;
+        opacity: 0.3;
+        pointer-events: none;
       }
 
       .register-card {
         border: none;
         border-radius: 2rem;
         overflow: hidden;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
       }
 
+      .register-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Left Side - Modern Gradient */
       .register-left {
-        background: linear-gradient(135deg, #0d6efd, #0a58ca);
+        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 50%, #0047ab 100%);
         padding: 3rem;
         color: white;
         height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .register-left::before {
+        content: "⚓";
+        font-size: 180px;
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        opacity: 0.08;
+        pointer-events: none;
+      }
+
+      .register-left::after {
+        content: "🗾";
+        font-size: 140px;
+        position: absolute;
+        top: -30px;
+        left: -40px;
+        opacity: 0.06;
+        pointer-events: none;
       }
 
       .register-right {
         padding: 3rem;
-        background: white;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
       }
 
+      /* Modern Benefits */
       .benefit-item {
         display: flex;
         align-items: center;
         gap: 1rem;
         margin-bottom: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefit-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
       }
 
       .benefit-icon {
         width: 48px;
         height: 48px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.15);
         border-radius: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
+        transition: all 0.3s ease;
       }
 
+      .benefit-item:hover .benefit-icon {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.05);
+      }
+
+      /* Form Styling */
       .form-control,
       .form-select {
-        border: 1px solid #e2e8f0;
+        border: 1.5px solid #e2e8f0;
         border-radius: 0.75rem;
         padding: 0.75rem 1rem;
         transition: all 0.3s ease;
+        font-size: 0.95rem;
       }
 
       .form-control:focus,
       .form-select:focus {
         border-color: #0d6efd;
         box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+        outline: none;
       }
 
+      .form-label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        color: #1e293b;
+      }
+
+      /* Modern Button */
       .btn-register {
         background: linear-gradient(135deg, #0d6efd, #0a58ca);
         border: none;
@@ -86,6 +163,8 @@
         font-weight: 600;
         font-size: 1rem;
         transition: all 0.3s ease;
+        color: white;
+        width: 100%;
       }
 
       .btn-register:hover {
@@ -93,34 +172,40 @@
         box-shadow: 0 10px 25px -5px rgba(13, 110, 253, 0.4);
       }
 
+      /* Step Indicator Modern */
       .step-indicator {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 2rem;
         position: relative;
+        padding: 0 1rem;
       }
 
       .step {
-        width: 40px;
-        height: 40px;
+        width: 48px;
+        height: 48px;
         background: white;
         border: 2px solid #dee2e6;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: 600;
+        font-weight: 700;
         color: #6c757d;
         position: relative;
         z-index: 2;
         background: white;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
       }
 
       .step.active {
-        background: #0d6efd;
+        background: linear-gradient(135deg, #0d6efd, #0a58ca);
         border-color: #0d6efd;
         color: white;
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        transform: scale(1.05);
       }
 
       .step.completed {
@@ -131,57 +216,122 @@
 
       .step-line {
         flex: 1;
-        height: 2px;
+        height: 3px;
         background: #dee2e6;
         margin: 0 0.5rem;
         position: relative;
         z-index: 1;
+        border-radius: 3px;
+        transition: all 0.3s ease;
       }
 
       .step-line.active {
-        background: #0d6efd;
+        background: linear-gradient(90deg, #0d6efd, #0a58ca);
       }
 
+      /* Form Step Animation */
       .form-step {
         display: none;
-        animation: fadeIn 0.5s ease;
+        animation: fadeInUp 0.5s ease;
       }
 
       .form-step.active-step {
         display: block;
       }
 
-      @keyframes fadeIn {
+      @keyframes fadeInUp {
         from {
           opacity: 0;
-          transform: translateX(20px);
+          transform: translateY(20px);
         }
         to {
           opacity: 1;
-          transform: translateX(0);
+          transform: translateY(0);
         }
       }
 
+      /* Program Card Modern */
+      .program-card {
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid #e2e8f0;
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+
+      .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .program-card.selected {
+        border-color: #0d6efd;
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        box-shadow: 0 10px 25px -5px rgba(13, 110, 253, 0.2);
+      }
+
+      /* Password Strength */
       .password-strength {
-        height: 4px;
+        height: 5px;
         background: #e2e8f0;
-        border-radius: 2px;
-        margin-top: 0.5rem;
-        transition: all 0.3s ease;
+        border-radius: 3px;
+        margin-top: 0.75rem;
+        overflow: hidden;
       }
 
       .password-strength-bar {
         height: 100%;
-        border-radius: 2px;
-        transition: width 0.3s ease;
+        border-radius: 3px;
+        transition:
+          width 0.3s ease,
+          background-color 0.3s ease;
       }
 
+      /* Alert Modern */
       .alert-custom {
-        border-radius: 0.75rem;
+        border-radius: 1rem;
         border: none;
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        padding: 1rem;
       }
 
+      /* Navigation Buttons */
+      .btn-nav {
+        border-radius: 0.75rem;
+        padding: 0.7rem 1.8rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-nav-prev {
+        border: 1.5px solid #cbd5e1;
+        background: white;
+        color: #475569;
+      }
+
+      .btn-nav-prev:hover {
+        border-color: #0d6efd;
+        color: #0d6efd;
+        transform: translateX(-3px);
+      }
+
+      .btn-nav-next {
+        background: linear-gradient(135deg, #0d6efd, #0a58ca);
+        border: none;
+        color: white;
+      }
+
+      .btn-nav-next:hover {
+        transform: translateX(3px);
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+      }
+
+      /* Responsive */
       @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
         .register-left {
           padding: 2rem;
           text-align: center;
@@ -194,25 +344,68 @@
         .benefit-item {
           justify-content: center;
         }
+
+        .step {
+          width: 40px;
+          height: 40px;
+          font-size: 0.9rem;
+        }
+
+        .btn-nav {
+          padding: 0.5rem 1.2rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Floating Label Effect */
+      .floating-label-group {
+        position: relative;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #0d6efd, #0a58ca);
+        border-radius: 4px;
+      }
+
+      /* Badge */
+      .badge-custom {
+        background: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
       }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="row justify-content-center align-items-center min-vh-100">
-        <div class="col-lg-10">
+        <div class="col-lg-11 col-xl-10" data-aos="fade-up" data-aos-duration="1000">
           <div class="card register-card">
             <div class="row g-0">
               <!-- Left Side - Info & Benefits -->
               <div class="col-lg-5 register-left">
                 <div class="d-flex flex-column h-100">
-                  <div class="mb-4">
-                    <i class="fas fa-ship fa-2x mb-3"></i>
-                    <h2 class="fw-bold mb-3">Mulai Karir Global Anda</h2>
-                    <p class="opacity-75">Bergabunglah dengan ribuan alumni sukses yang telah mewujudkan mimpi bekerja di kapal pesiar internasional dan perusahaan top Jepang.</p>
+                  <div class="mb-4" data-aos="fade-right" data-aos-delay="200">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                      <i class="fas fa-ship fa-2x"></i>
+                      <span class="badge-custom" style="background: rgba(255, 255, 255, 0.2); color: white">Premium Partner</span>
+                    </div>
+                    <h2 class="fw-bold mb-3" style="font-size: 2rem">Mulai Karir<br />Global Anda</h2>
+                    <p class="opacity-75">Bergabunglah dengan 5.000+ alumni sukses yang telah mewujudkan mimpi bekerja di kapal pesiar internasional dan perusahaan top Jepang.</p>
                   </div>
 
-                  <div class="my-4">
+                  <div class="my-4" data-aos="fade-right" data-aos-delay="300">
                     <div class="benefit-item">
                       <div class="benefit-icon">
                         <i class="fas fa-globe"></i>
@@ -229,16 +422,16 @@
                       </div>
                       <div>
                         <h6 class="fw-bold mb-0">Sertifikasi Resmi</h6>
-                        <small class="opacity-75">Diakui secara internasional</small>
+                        <small class="opacity-75">Diakui secara internasional & terakreditasi</small>
                       </div>
                     </div>
 
                     <div class="benefit-item">
                       <div class="benefit-icon">
-                        <i class="fas fa-handshake"></i>
+                        <i class="fas fa-chart-line"></i>
                       </div>
                       <div>
-                        <h6 class="fw-bold mb-0">Penempatan Kerja</h6>
+                        <h6 class="fw-bold mb-0">Penempatan 96%</h6>
                         <small class="opacity-75">Garansi penempatan untuk lulusan terbaik</small>
                       </div>
                     </div>
@@ -249,17 +442,19 @@
                       </div>
                       <div>
                         <h6 class="fw-bold mb-0">Pendampingan 24/7</h6>
-                        <small class="opacity-75">Dukungan penuh selama program</small>
+                        <small class="opacity-75">Dukungan penuh selama program berlangsung</small>
                       </div>
                     </div>
                   </div>
 
-                  <div class="mt-auto pt-4">
-                    <div class="d-flex gap-3">
-                      <i class="fas fa-phone-alt"></i>
+                  <div class="mt-auto pt-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="d-flex gap-3 align-items-center">
+                      <div class="benefit-icon" style="width: 40px; height: 40px">
+                        <i class="fas fa-phone-alt"></i>
+                      </div>
                       <div>
-                        <small class="opacity-75">Butuh bantuan?</small><br />
-                        <strong>+62 811 2345 6789</strong>
+                        <small class="opacity-75">Butuh bantuan? Hubungi kami</small><br />
+                        <strong class="fs-5">+62 811 2345 6789</strong>
                       </div>
                     </div>
                   </div>
@@ -268,7 +463,7 @@
 
               <!-- Right Side - Registration Form -->
               <div class="col-lg-7 register-right">
-                <div class="step-indicator">
+                <div class="step-indicator" data-aos="fade-down" data-aos-delay="100">
                   <div class="step active" id="step1-indicator">1</div>
                   <div class="step-line" id="line1"></div>
                   <div class="step" id="step2-indicator">2</div>
@@ -280,45 +475,45 @@
                   <!-- Step 1: Personal Information -->
                   <div class="form-step active-step" id="step1">
                     <h3 class="fw-bold mb-2">Informasi Pribadi</h3>
-                    <p class="text-secondary mb-4">Lengkapi data diri Anda dengan benar</p>
+                    <p class="text-secondary mb-4">Lengkapi data diri Anda dengan benar untuk proses seleksi</p>
 
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="fullname" placeholder="Contoh: Ahmad Wijaya" required />
+                        <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="fullname" placeholder="Ahmad Wijaya" required />
                       </div>
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Nama Panggilan</label>
-                        <input type="text" class="form-control" id="nickname" placeholder="Contoh: Ahmad" />
+                        <label class="form-label">Nama Panggilan</label>
+                        <input type="text" class="form-control" id="nickname" placeholder="Ahmad" />
                       </div>
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="email@example.com" required />
+                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" placeholder="ahmad@example.com" required />
                       </div>
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Nomor WhatsApp <span class="text-danger">*</span></label>
+                        <label class="form-label">Nomor WhatsApp <span class="text-danger">*</span></label>
                         <input type="tel" class="form-control" id="whatsapp" placeholder="+62 812 3456 7890" required />
                       </div>
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Tempat Lahir</label>
-                        <input type="text" class="form-control" id="birthplace" placeholder="Contoh: Jakarta" />
+                        <label class="form-label">Tempat Lahir</label>
+                        <input type="text" class="form-control" id="birthplace" placeholder="Jakarta" />
                       </div>
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Tanggal Lahir</label>
+                        <label class="form-label">Tanggal Lahir</label>
                         <input type="date" class="form-control" id="birthdate" />
                       </div>
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jenis Kelamin</label>
+                        <label class="form-label">Jenis Kelamin</label>
                         <select class="form-select" id="gender">
-                          <option selected>Pilih Jenis Kelamin</option>
+                          <option selected disabled>Pilih Jenis Kelamin</option>
                           <option>Laki-laki</option>
                           <option>Perempuan</option>
                         </select>
                       </div>
                       <div class="col-md-6">
-                        <label class="form-label fw-semibold">Pendidikan Terakhir</label>
+                        <label class="form-label">Pendidikan Terakhir</label>
                         <select class="form-select" id="education">
-                          <option selected>Pilih Pendidikan</option>
+                          <option selected disabled>Pilih Pendidikan</option>
                           <option>SMA/SMK Sederajat</option>
                           <option>D3</option>
                           <option>S1</option>
@@ -326,7 +521,7 @@
                         </select>
                       </div>
                       <div class="col-12">
-                        <label class="form-label fw-semibold">Alamat Lengkap</label>
+                        <label class="form-label">Alamat Lengkap</label>
                         <textarea class="form-control" id="address" rows="2" placeholder="Jl. Contoh No. 123, RT/RW, Kelurahan, Kecamatan, Kota"></textarea>
                       </div>
                     </div>
@@ -334,27 +529,37 @@
 
                   <!-- Step 2: Program Selection -->
                   <div class="form-step" id="step2">
-                    <h3 class="fw-bold mb-2">Pilih Program</h3>
-                    <p class="text-secondary mb-4">Pilih program yang sesuai dengan minat Anda</p>
+                    <h3 class="fw-bold mb-2">Pilih Program Unggulan</h3>
+                    <p class="text-secondary mb-4">Pilih program yang sesuai dengan passion dan tujuan karir Anda</p>
 
                     <div class="mb-4">
-                      <label class="form-label fw-semibold">Program yang diminati <span class="text-danger">*</span></label>
+                      <label class="form-label">Program yang diminati <span class="text-danger">*</span></label>
                       <div class="row g-3">
                         <div class="col-md-6">
-                          <div class="card h-100 program-card" data-program="cruise" style="cursor: pointer; transition: all 0.3s ease; border: 2px solid #e2e8f0">
-                            <div class="card-body text-center p-3">
-                              <i class="fas fa-ship fa-2x text-primary mb-2"></i>
-                              <h6 class="fw-bold mb-1">Sekolah Kapal Pesiar</h6>
+                          <div class="card program-card" data-program="cruise">
+                            <div class="card-body text-center p-4">
+                              <div class="mb-3">
+                                <i class="fas fa-ship fa-3x text-primary"></i>
+                              </div>
+                              <h6 class="fw-bold mb-2">Sekolah Kapal Pesiar</h6>
                               <small class="text-secondary">Pelatihan 3 bulan + Sertifikasi STCW</small>
+                              <div class="mt-2">
+                                <span class="badge-custom">Kuota Terbatas</span>
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="card h-100 program-card" data-program="japan" style="cursor: pointer; transition: all 0.3s ease; border: 2px solid #e2e8f0">
-                            <div class="card-body text-center p-3">
-                              <i class="fas fa-building fa-2x text-primary mb-2"></i>
-                              <h6 class="fw-bold mb-1">Pelatihan Kerja Jepang</h6>
+                          <div class="card program-card" data-program="japan">
+                            <div class="card-body text-center p-4">
+                              <div class="mb-3">
+                                <i class="fas fa-building fa-3x text-primary"></i>
+                              </div>
+                              <h6 class="fw-bold mb-2">Pelatihan Kerja Jepang</h6>
                               <small class="text-secondary">SSW & Magang Teknikal</small>
+                              <div class="mt-2">
+                                <span class="badge-custom">Early Bird</span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -363,38 +568,42 @@
                     </div>
 
                     <div class="mb-4" id="cruiseFields" style="display: none">
-                      <label class="form-label fw-semibold">Posisi yang diminati</label>
+                      <label class="form-label">Posisi yang diminati</label>
                       <select class="form-select" id="cruisePosition">
-                        <option selected>Pilih Posisi</option>
+                        <option selected disabled>Pilih Posisi</option>
                         <option>Housekeeping</option>
                         <option>Food & Beverage Service</option>
                         <option>Front Office/Guest Service</option>
                         <option>Galley/Cook</option>
                         <option>Bar & Beverage</option>
+                        <option>Recreation/Activity Staff</option>
                       </select>
                     </div>
 
                     <div class="mb-4" id="japanFields" style="display: none">
-                      <label class="form-label fw-semibold">Bidang Pekerjaan di Jepang</label>
+                      <label class="form-label">Bidang Pekerjaan di Jepang</label>
                       <select class="form-select" id="japanField">
-                        <option selected>Pilih Bidang</option>
+                        <option selected disabled>Pilih Bidang</option>
                         <option>Perhotelan (Hotel & Restoran)</option>
                         <option>Manufaktur</option>
                         <option>Perawatan Lansia (Kaigo)</option>
                         <option>Konstruksi</option>
                         <option>Pertanian & Perikanan</option>
+                        <option>IT & Teknologi</option>
                       </select>
                     </div>
 
                     <div class="mb-4">
-                      <label class="form-label fw-semibold">Bagaimana Anda mengetahui kami?</label>
+                      <label class="form-label">Bagaimana Anda mengetahui kami?</label>
                       <select class="form-select" id="source">
-                        <option selected>Pilih Sumber Informasi</option>
+                        <option selected disabled>Pilih Sumber Informasi</option>
                         <option>Instagram</option>
                         <option>Facebook</option>
                         <option>TikTok</option>
+                        <option>YouTube</option>
                         <option>Rekomendasi Teman/Keluarga</option>
                         <option>Google Search</option>
+                        <option>Job Fair</option>
                         <option>Lainnya</option>
                       </select>
                     </div>
@@ -402,22 +611,22 @@
 
                   <!-- Step 3: Account & Submit -->
                   <div class="form-step" id="step3">
-                    <h3 class="fw-bold mb-2">Buat Akun</h3>
-                    <p class="text-secondary mb-4">Buat password untuk akun Anda</p>
+                    <h3 class="fw-bold mb-2">Buat Akun & Selesaikan</h3>
+                    <p class="text-secondary mb-4">Lindungi akun Anda dengan password yang kuat</p>
 
                     <div class="mb-3">
-                      <label class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
+                      <label class="form-label">Username <span class="text-danger">*</span></label>
                       <div class="input-group">
                         <span class="input-group-text bg-light border-end-0"><i class="fas fa-user"></i></span>
-                        <input type="text" class="form-control border-start-0" id="username" placeholder="pilih username" required />
+                        <input type="text" class="form-control border-start-0" id="username" placeholder="pilih username unik" required />
                       </div>
                     </div>
 
                     <div class="mb-3">
-                      <label class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
+                      <label class="form-label">Password <span class="text-danger">*</span></label>
                       <div class="input-group">
                         <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control border-start-0" id="password" placeholder="buat password" required />
+                        <input type="password" class="form-control border-start-0" id="password" placeholder="buat password kuat" required />
                         <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                           <i class="fas fa-eye"></i>
                         </button>
@@ -425,11 +634,11 @@
                       <div class="password-strength mt-2">
                         <div class="password-strength-bar" id="passwordStrength" style="width: 0%"></div>
                       </div>
-                      <small class="text-secondary">Minimal 8 karakter, kombinasi huruf dan angka</small>
+                      <small class="text-secondary">Minimal 8 karakter, kombinasi huruf besar, huruf kecil, dan angka</small>
                     </div>
 
                     <div class="mb-4">
-                      <label class="form-label fw-semibold">Konfirmasi Password <span class="text-danger">*</span></label>
+                      <label class="form-label">Konfirmasi Password <span class="text-danger">*</span></label>
                       <div class="input-group">
                         <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock"></i></span>
                         <input type="password" class="form-control border-start-0" id="confirmPassword" placeholder="konfirmasi password" required />
@@ -437,27 +646,29 @@
                       <div id="passwordMatch" class="small mt-1"></div>
                     </div>
 
-                    <div class="alert alert-custom alert-info bg-opacity-10">
-                      <div class="d-flex gap-2">
-                        <i class="fas fa-shield-alt fs-5"></i>
+                    <div class="alert alert-custom">
+                      <div class="d-flex gap-3">
+                        <i class="fas fa-shield-alt fs-4 text-primary"></i>
                         <div>
-                          <strong>Data Anda aman</strong><br />
-                          <small>Kami menjaga kerahasiaan data Anda dan tidak akan membagikannya ke pihak ketiga tanpa izin Anda.</small>
+                          <strong class="d-block mb-1">Data Anda 100% Aman</strong>
+                          <small>Kami menjaga kerahasiaan data Anda dan tidak akan membagikannya ke pihak ketiga tanpa izin Anda. Terenkripsi dengan teknologi SSL.</small>
                         </div>
                       </div>
                     </div>
 
                     <div class="form-check mb-4">
                       <input class="form-check-input" type="checkbox" id="terms" required />
-                      <label class="form-check-label" for="terms"> Saya menyetujui <a href="#" class="text-primary">Syarat & Ketentuan</a> dan <a href="#" class="text-primary">Kebijakan Privasi</a> </label>
+                      <label class="form-check-label" for="terms">
+                        Saya menyetujui <a href="#" class="text-primary text-decoration-none">Syarat & Ketentuan</a> dan <a href="#" class="text-primary text-decoration-none">Kebijakan Privasi</a>
+                      </label>
                     </div>
                   </div>
 
                   <!-- Navigation Buttons -->
                   <div class="d-flex justify-content-between mt-4">
-                    <button type="button" class="btn btn-outline-secondary px-4" id="prevBtn" style="display: none"><i class="fas fa-arrow-left me-2"></i>Kembali</button>
-                    <button type="button" class="btn btn-primary-custom px-4" id="nextBtn">Selanjutnya <i class="fas fa-arrow-right ms-2"></i></button>
-                    <button type="submit" class="btn btn-register text-white px-4" id="submitBtn" style="display: none"><i class="fas fa-paper-plane me-2"></i>Daftar Sekarang</button>
+                    <button type="button" class="btn btn-nav btn-nav-prev" id="prevBtn" style="display: none"><i class="fas fa-arrow-left me-2"></i>Kembali</button>
+                    <button type="button" class="btn btn-nav btn-nav-next" id="nextBtn">Selanjutnya <i class="fas fa-arrow-right ms-2"></i></button>
+                    <button type="submit" class="btn btn-register" id="submitBtn" style="display: none"><i class="fas fa-paper-plane me-2"></i>Daftar Sekarang</button>
                   </div>
                 </form>
               </div>
@@ -467,24 +678,35 @@
       </div>
     </div>
 
-    <!-- Modal Success -->
+    <!-- Modern Success Modal -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded-4 text-center p-4">
+        <div class="modal-content border-0 rounded-4 text-center p-4" style="background: linear-gradient(135deg, #fff, #f8fafc)">
           <div class="modal-body">
             <div class="mb-3">
-              <i class="fas fa-check-circle text-success" style="font-size: 4rem"></i>
+              <div class="mx-auto" style="width: 80px; height: 80px; background: linear-gradient(135deg, #198754, #0d6efd); border-radius: 50%; display: flex; align-items: center; justify-content: center">
+                <i class="fas fa-check-circle text-white" style="font-size: 3rem"></i>
+              </div>
             </div>
             <h4 class="fw-bold mb-2">Pendaftaran Berhasil!</h4>
-            <p class="text-secondary mb-4">Terima kasih telah mendaftar. Tim konselor kami akan segera menghubungi Anda dalam 1x24 jam melalui WhatsApp.</p>
-            <button class="btn btn-primary-custom px-4" data-bs-dismiss="modal"><i class="fas fa-home me-2"></i>Kembali ke Beranda</button>
+            <p class="text-secondary mb-3">Terima kasih telah mendaftar di Samudra Nusantara.</p>
+            <div class="alert alert-success bg-opacity-10 border-0 rounded-3">
+              <small>Tim konselor kami akan segera menghubungi Anda dalam 1x24 jam melalui WhatsApp.</small>
+            </div>
+            <button class="btn btn-register px-4" data-bs-dismiss="modal"><i class="fas fa-home me-2"></i>Kembali ke Beranda</button>
           </div>
         </div>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+      AOS.init({
+        once: true,
+        duration: 800,
+      });
+
       // Multi-step form
       let currentStep = 1;
       const totalSteps = 3;
@@ -497,12 +719,10 @@
       const submitBtn = document.getElementById("submitBtn");
 
       function updateSteps() {
-        // Hide all steps
         step1.classList.remove("active-step");
         step2.classList.remove("active-step");
         step3.classList.remove("active-step");
 
-        // Show current step
         if (currentStep === 1) {
           step1.classList.add("active-step");
           prevBtn.style.display = "none";
@@ -520,7 +740,6 @@
           submitBtn.style.display = "inline-flex";
         }
 
-        // Update step indicators
         for (let i = 1; i <= totalSteps; i++) {
           const stepIndicator = document.getElementById(`step${i}-indicator`);
           const line = document.getElementById(`line${i - 1}`);
@@ -546,19 +765,23 @@
         const whatsapp = document.getElementById("whatsapp").value.trim();
 
         if (!fullname) {
-          alert("Mohon isi nama lengkap Anda");
+          alert("⚠️ Mohon isi nama lengkap Anda");
+          document.getElementById("fullname").focus();
           return false;
         }
         if (!email) {
-          alert("Mohon isi alamat email");
+          alert("⚠️ Mohon isi alamat email");
+          document.getElementById("email").focus();
           return false;
         }
-        if (!email.includes("@")) {
-          alert("Mohon isi email yang valid");
+        if (!email.includes("@") || !email.includes(".")) {
+          alert("⚠️ Mohon isi email yang valid (contoh: nama@domain.com)");
+          document.getElementById("email").focus();
           return false;
         }
         if (!whatsapp) {
-          alert("Mohon isi nomor WhatsApp");
+          alert("⚠️ Mohon isi nomor WhatsApp untuk memudahkan komunikasi");
+          document.getElementById("whatsapp").focus();
           return false;
         }
         return true;
@@ -567,7 +790,7 @@
       function validateStep2() {
         const selectedProgram = document.getElementById("selectedProgram").value;
         if (!selectedProgram) {
-          alert("Mohon pilih program yang diminati");
+          alert("⚠️ Mohon pilih program yang diminati");
           return false;
         }
         return true;
@@ -580,19 +803,27 @@
         const terms = document.getElementById("terms").checked;
 
         if (!username) {
-          alert("Mohon isi username");
+          alert("⚠️ Mohon isi username");
+          document.getElementById("username").focus();
+          return false;
+        }
+        if (username.length < 3) {
+          alert("⚠️ Username minimal 3 karakter");
+          document.getElementById("username").focus();
           return false;
         }
         if (!password || password.length < 8) {
-          alert("Password minimal 8 karakter");
+          alert("⚠️ Password minimal 8 karakter");
+          document.getElementById("password").focus();
           return false;
         }
         if (password !== confirmPassword) {
-          alert("Password dan konfirmasi password tidak cocok");
+          alert("⚠️ Password dan konfirmasi password tidak cocok");
+          document.getElementById("confirmPassword").focus();
           return false;
         }
         if (!terms) {
-          alert("Mohon setujui Syarat & Ketentuan");
+          alert("⚠️ Mohon setujui Syarat & Ketentuan");
           return false;
         }
         return true;
@@ -620,16 +851,13 @@
       programCards.forEach((card) => {
         card.addEventListener("click", () => {
           programCards.forEach((c) => {
-            c.style.borderColor = "#e2e8f0";
-            c.style.backgroundColor = "white";
+            c.classList.remove("selected");
           });
-          card.style.borderColor = "#0d6efd";
-          card.style.backgroundColor = "#f0f7ff";
+          card.classList.add("selected");
 
           const program = card.getAttribute("data-program");
           document.getElementById("selectedProgram").value = program;
 
-          // Show/hide additional fields
           if (program === "cruise") {
             document.getElementById("cruiseFields").style.display = "block";
             document.getElementById("japanFields").style.display = "none";
@@ -701,26 +929,28 @@
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         if (validateStep3()) {
-          // Simulate form submission
           const formData = {
             fullname: document.getElementById("fullname").value,
             email: document.getElementById("email").value,
             whatsapp: document.getElementById("whatsapp").value,
             program: document.getElementById("selectedProgram").value,
             username: document.getElementById("username").value,
+            registeredAt: new Date().toISOString(),
           };
 
           console.log("Form submitted:", formData);
+
+          // You can send data to server here
+          // fetch('/api/register', { method: 'POST', body: JSON.stringify(formData), headers: {'Content-Type': 'application/json'} })
+
           successModal.show();
 
-          // Reset form after modal close
           document.getElementById("successModal").addEventListener("hidden.bs.modal", () => {
             window.location.href = "index.html";
           });
         }
       });
 
-      // Initialize
       updateSteps();
     </script>
   </body>
